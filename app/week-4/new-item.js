@@ -15,6 +15,7 @@ export default function NewItem(){
 
             <div className="  bg-white m-5 flex items-center  ">
             <p className= " self-center mr-8 ml-2 ">  {quantity} </p>
+            
             <button disabled={quantity >= 20} onClick={increment} className=" w-10 h-10 bg-slate-300 m-2 "> + </button>
 
             <button disabled={quantity <= 1} onClick={decrement} className="bg-sky-400  w-10 h-10  m-2"> - </button>
