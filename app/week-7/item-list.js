@@ -1,26 +1,28 @@
 "use client";
 
+import { useState } from "react";
+
 import Item from "./item";
-import itemJson from "./item.json";
-import {useState} from "react";
+//import itemJson from "./item.json";
 
-export default function ItemList(){
 
-    let items = [...itemJson];
+export default function ItemList( {items} ){
 
-     let [sortBy, setSortBy] = useState("name");
+    const [sortBy, setSortBy] = useState("name");
+   //let items = [...itemJson];
 
-    
-        if(sortBy === "name"){
-            items.sort((a,b) => a.name.localeCompare(b.name));
-        } else if(sortBy === "category"){
-            items.sort((a,b) => a.category.localeCompare(b.category));
-        } else if(sortBy === "groupedCategory"){
-            const sortCategory = items.sort((a,b) => a.category.localeCompare(b.category));
+   const sortedItems = [...items].sort((a, b) => {
+    if (sortBy === "name") {
+        return a.name.localeCompare(b.name);
+    } else if (sortBy === "category") {
+        return a.category.localeCompare(b.category);
+    } else if (sortBy === "groupedCategory") {
+        // Grouped category logic (categorize items by category, then sort within each category)
+        return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
+    }
+    return 0;
+ });
 
-            // const sortGroupCategory = sortCategory.reduce(acc , value) => acc + value, '');
-            // const arr7 = arr5.reduce((acc, value) => acc + value, 0); //178
-        }
     
 
     return(
@@ -52,7 +54,7 @@ export default function ItemList(){
            </div>
 
             <ul>
-                {items.map((i) => (
+                {sortedItems.map((i) => (
 
                     <li key={i.id}>
                         {/* <h2 className = "text-lg font-semibold">{i.name}</h2> */}
