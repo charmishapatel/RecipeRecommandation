@@ -44,7 +44,7 @@ export default function ItemList( {items , onItemSelect} ){
 
                 <button 
                     onClick = {() => setSortBy("") }
-                    className= {`rounded-md w-30 h-10 p-3 m-2 
+                    className= {`rounded-md w-30 h-14 p-2 m-2 
                     ${sortBy== "groupCategory" ? "bg-orange-600 text-2xl p-2 h-20 w-35" : "bg-orange-400"}`}>Sort by Grouped category
                 </button>
 

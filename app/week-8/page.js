@@ -19,24 +19,40 @@ export default function Page() {
     //     setSelectedItemName()
     // };
 
-    const handleItemSelect = (itemName)  => {
-        setSelectedItemName(itemName)
+    const handleItemSelect = (itemName) => {
+        const cleanedName = itemName
+        .replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF])/g, '') // Remove emojis
+        .replace(/,.*$/, '') // Remove anything after a comma
+        .trim(); // Remove leading/trailing whitespace
+
+    setSelectedItemName(cleanedName);
     };
+    
 
     const handleAddItem = (newItem)  => {
         setItems([...items, newItem]);
     };
 
     return (
-        <main>
-            <NewItem3 onAddItem = {handleAddItem}></NewItem3>
+        <main className="flex">
+            <div className="flex">
+                <NewItem3 
+                onAddItem = {handleAddItem}>
+                </NewItem3>
 
 
-            <ItemList 
-             items = {items}
-             onItemSelect = {handleItemSelect}></ItemList>
+                <ItemList 
+                items = {items}
+                onItemSelect = {handleItemSelect}>
+                </ItemList>
 
-            {selectedItemName && <MealIdea ingredient={selectedItemName} />}
+            </div>
+
+            <div>
+                <MealIdea 
+                 ingredient={selectedItemName} 
+                />
+            </div>
         </main>
     )
 }
