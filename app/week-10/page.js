@@ -2,8 +2,11 @@
 
 
 // Import the useUserAuth hook
-import { useUserAuth } from "./_utils/auth-context";
-import Page from "./shopping-list/page";
+import { useUserAuth } from "./_utils/auth-content";
+
+
+
+import Page from "./shopping_list/page";
  
 
 export default  function page() {

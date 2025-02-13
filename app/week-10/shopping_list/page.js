@@ -17,7 +17,7 @@ import MealIdea from "@/app/week-8/meal-ideas";
 //import MealIdea from "./meal-ideas";
 
 
-import { useUserAuth } from "../_utils/auth-context";
+import { useUserAuth } from "../_utils/auth-content";
 
 export default function Page() {
 
