@@ -3,10 +3,10 @@
 
 // Import the useUserAuth hook
 import { useUserAuth } from "./_utils/auth-context";
-import Page from "./shopping-list/page";
+import ShoppingListPage from "./shopping-list/page";
  
 
-export default  function page() {
+export default  function Page() {
     const {user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
 
@@ -27,7 +27,7 @@ export default  function page() {
                     <div>
                         <p>Welcome, {user.displayName}</p>
 
-                        <Page></Page>
+                        <ShoppingListPage/>
                         <button onClick = {logout}> Logout </button>
                     </div>
                 ) : (

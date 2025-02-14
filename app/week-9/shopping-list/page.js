@@ -19,7 +19,7 @@ import MealIdea from "@/app/week-8/meal-ideas";
 
 import { useUserAuth } from "../_utils/auth-context";
 
-export default function Page() {
+export default function ShoppingListPage() {
 
     
 

@@ -1,13 +1,8 @@
+"use client";
 
-"use client"
-import {
-    useState,
-    useEffect,
-} from "react";
+import { useState, useEffect, useCallback } from "react";
 
-
-export default function MealIdea({ingredient}){
-
+export default function MealIdea({ ingredient }) {
     let [meals, setMeals] = useState([]);
 
     const fetchMealIdeas = async (ingredient) => {
@@ -16,30 +11,27 @@ export default function MealIdea({ingredient}){
         return data.meals || [];
     };
 
-    const loadMealIdeas = async () => {
+    // ✅ Memoize `loadMealIdeas` using `useCallback`
+    const loadMealIdeas = useCallback(async () => {
         const mealData = await fetchMealIdeas(ingredient);
         setMeals(mealData);
-    }
+    }, [ingredient]);  // ✅ Now depends on `ingredient`
 
-    
-    useEffect(()=> {
+    useEffect(() => {
         if (ingredient) {
-        loadMealIdeas();
+            loadMealIdeas();
         }
-    } ,[ingredient]);
+    }, [ingredient, loadMealIdeas]);  // ✅ Include `loadMealIdeas` in dependencies
 
-
-    return(
+    return (
         <div>
-            {meals.map((meal)=> 
-             <ul>
-                <li 
-                 className="text-blue-400
-                 font-medium"
-                 key={meal.idMeal}> 
-                    {meal.strMeal}
-                </li>
-             </ul>)}
+            {meals.map((meal) => (
+                <ul key={meal.idMeal}>  {/* ✅ Moved `key` to `ul` */}
+                    <li className="text-blue-400 font-medium">
+                        {meal.strMeal}
+                    </li>
+                </ul>
+            ))}
         </div>
-    )
+    );
 }
